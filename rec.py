@@ -50,6 +50,11 @@ def run_rec(prog, debug = False):
                 print(stack.pop())
             elif prog[ptr] == 'R':
                 stack.append(int(input()))
+            elif prog[ptr] == 's':
+                last = max(0, ptr-1)
+                while last and prog[last].isspace():
+                    last -= 1
+                print(f'({last}) {prog[last]}', stack)
             elif prog[ptr] == 'b':
                 debug = True
 
