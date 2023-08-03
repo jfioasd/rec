@@ -70,7 +70,7 @@ def run_rec(prog, debug = False):
         exit(0)
 
 if __name__ == '__main__':
-    if "-r" in sys.argv:
+    if len(sys.argv) < 2 or "-r" in sys.argv:
         while True:
             try:
                 line = input("r> ")
@@ -79,8 +79,6 @@ if __name__ == '__main__':
             run_rec(line)
             print(stack)
     else:
-        if len(sys.argv) < 2:
-            exit(0)
         prog = open(sys.argv[-1]).read()
         try:
             if '-d' in sys.argv:
