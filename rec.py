@@ -51,7 +51,7 @@ def run_rec(prog):
             last = max(0, ptr-1)
             while last and prog[last].isspace():
                 last -= 1
-            print(f'({prog[last]}, {last})', stack)
+            print(f'({prog[last]} {last})', stack)
 
         ptr += 1
 
