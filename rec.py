@@ -50,23 +50,11 @@ def run_rec(prog, debug = False):
                 print(stack.pop())
             elif prog[ptr] == 'R':
                 stack.append(int(input()))
-            elif prog[ptr] == 's':
-                last = max(0, ptr-1)
-                while last and prog[last].isspace():
-                    last -= 1
-                print(f'({last}) {prog[last]}', stack)
-            elif prog[ptr] == 'p':
-                x = stack.pop()
-                print(f'[{x}] =', stack[~x])
             elif prog[ptr] == 'b':
                 debug = True
 
-            # For the REPL
-            elif prog[ptr] == 'x':
-                exit(0)
-
             if debug and not prog[ptr].isspace():
-                input(f'({ptr}) {prog[ptr]} ' + str(stack))
+                x = input(f'({ptr}) {prog[ptr]} ' + str(stack) + ' ')
 
             ptr += 1
     except IndexError as e:
@@ -79,12 +67,20 @@ def run_rec(prog, debug = False):
 if __name__ == '__main__':
     if "-r" in sys.argv:
         while True:
-            line = input("r> ")
+            try:
+                line = input("r> ")
+            except EOFError:
+                break
             run_rec(line)
             print(stack)
     else:
+        if len(sys.argv) < 2:
+            exit(0)
         prog = open(sys.argv[-1]).read()
-        if '-d' in sys.argv:
-            run_rec(prog, True)
-        else:
-            run_rec(prog)
+        try:
+            if '-d' in sys.argv:
+                run_rec(prog, True)
+            else:
+                run_rec(prog)
+        except EOFError:
+            pass
