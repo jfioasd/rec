@@ -54,14 +54,17 @@ def run_rec(prog):
                 last = max(0, ptr-1)
                 while last and prog[last].isspace():
                     last -= 1
-                print(f'({prog[last]} {last})', stack)
+                print(f'({last}) {prog[last]}', stack)
+            elif prog[ptr] == 'p':
+                x = stack.pop()
+                print(f'[{x}] =', stack[~x])
 
             ptr += 1
     except IndexError as e:
         if str(e) == 'string index out of range':
             e = 'unbalanced brackets'
         print("IndexError:", e)
-        print(f's: ({prog[ptr]} {ptr})', stack)
+        print(f's: ({ptr}) {prog[ptr]}', stack)
         exit(0)
 
 if __name__ == '__main__':
