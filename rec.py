@@ -58,6 +58,8 @@ def run_rec(prog):
             elif prog[ptr] == 'p':
                 x = stack.pop()
                 print(f'[{x}] =', stack[~x])
+            elif prog[ptr] == 'x':
+                exit(0)
 
             ptr += 1
     except IndexError as e:
