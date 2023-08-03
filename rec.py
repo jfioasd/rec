@@ -58,6 +58,10 @@ def run_rec(prog, debug = False):
             elif prog[ptr] == 'p':
                 x = stack.pop()
                 print(f'[{x}] =', stack[~x])
+            elif prog[ptr] == 'b':
+                debug = True
+
+            # For the REPL
             elif prog[ptr] == 'x':
                 exit(0)
 
