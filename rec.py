@@ -2,7 +2,7 @@ import sys
 
 stack = []
 
-def run_rec(prog):
+def run_rec(prog, debug = False):
     ptr = 0
     try:
         while ptr < len(prog):
@@ -61,6 +61,9 @@ def run_rec(prog):
             elif prog[ptr] == 'x':
                 exit(0)
 
+            if debug:
+                input(f'({ptr}) {prog[ptr]} ' + str(stack))
+
             ptr += 1
     except IndexError as e:
         if str(e) == 'string index out of range':
@@ -70,11 +73,14 @@ def run_rec(prog):
         exit(0)
 
 if __name__ == '__main__':
-    if "-r" not in sys.argv:
-        prog = open(sys.argv[-1]).read()
-        run_rec(prog)
-    else:
+    if "-r" in sys.argv:
         while True:
             line = input("r> ")
             run_rec(line)
             print(stack)
+    else:
+        prog = open(sys.argv[-1]).read()
+        if '-d' in sys.argv:
+            run_rec(prog, True)
+        else:
+            run_rec(prog)
