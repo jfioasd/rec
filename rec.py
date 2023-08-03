@@ -21,7 +21,8 @@ def run_rec(prog):
             x, v = stack.pop(), stack.pop()
             stack[~x] = v
         elif prog[ptr] == '^':
-            assert(stack.pop() != 0)
+            if not stack.pop():
+                raise AssertionError
 
         elif prog[ptr] == '[':
             level = 1
@@ -46,6 +47,11 @@ def run_rec(prog):
             print(stack.pop())
         elif prog[ptr] == 'R':
             stack.append(int(input()))
+        elif prog[ptr] == 's':
+            last = max(0, ptr-1)
+            while last and prog[last].isspace():
+                last -= 1
+            print(f'({prog[last]}, {last})', stack)
 
         ptr += 1
 
