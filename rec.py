@@ -25,6 +25,8 @@ def run_rec(prog):
                 if not stack.pop():
                     raise AssertionError
 
+            elif prog[ptr] == ']':
+                raise IndexError('unbalanced brackets')
             elif prog[ptr] == '[':
                 level = 1
                 right = ptr + 1
@@ -56,6 +58,8 @@ def run_rec(prog):
 
             ptr += 1
     except IndexError as e:
+        if str(e) == 'string index out of range':
+            e = 'unbalanced brackets'
         print("IndexError:", e)
         print(f's: ({prog[ptr]} {ptr})', stack)
         exit(0)
