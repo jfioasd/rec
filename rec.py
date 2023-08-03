@@ -56,5 +56,12 @@ def run_rec(prog):
         ptr += 1
 
 if __name__ == '__main__':
-    prog = open(sys.argv[-1]).read()
-    run_rec(prog)
+    if "-r" not in sys.argv:
+        prog = open(sys.argv[-1]).read()
+        run_rec(prog)
+    else:
+        print("Type Ctrl-D to exit")
+        while True:
+            line = input("r> ")
+            run_rec(line)
+            print(stack)
