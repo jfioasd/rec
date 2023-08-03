@@ -61,7 +61,7 @@ def run_rec(prog, debug = False):
             elif prog[ptr] == 'x':
                 exit(0)
 
-            if debug:
+            if debug and not prog[ptr].isspace():
                 input(f'({ptr}) {prog[ptr]} ' + str(stack))
 
             ptr += 1
