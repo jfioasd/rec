@@ -57,9 +57,4 @@ def run_rec(prog):
 
 if __name__ == '__main__':
     prog = open(sys.argv[-1]).read()
-    if '-i' in sys.argv:
-        stack = eval(input())
-
     run_rec(prog)
-    if '-d' in sys.argv:
-        print(stack)
