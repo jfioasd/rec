@@ -50,6 +50,10 @@ def run_rec(prog, debug = False):
                 print(stack.pop())
             elif prog[ptr] == 'R':
                 stack.append(int(input()))
+            elif prog[ptr] == 'p':
+                print(end = chr(stack.pop()))
+            elif prog[ptr] == 'r':
+                stack.append(sys.stdin.read(1))
             elif prog[ptr] == 's':
                 last = max(0, ptr-1)
                 while last and prog[last].isspace():
@@ -62,12 +66,13 @@ def run_rec(prog, debug = False):
                 x = input(f'({ptr}) {prog[ptr]} ' + str(stack) + ' ')
 
             ptr += 1
-    except IndexError as e:
+
+    except Exception as e:
         if str(e) == 'string index out of range':
             e = 'unbalanced brackets'
-        print("IndexError:", e)
+        print(e)
         print(f's: ({ptr}) {prog[ptr]}', stack)
-        exit(0)
+        exit(1)
 
 if __name__ == '__main__':
     if len(sys.argv) < 2 or "-r" in sys.argv:
@@ -77,7 +82,7 @@ if __name__ == '__main__':
             except EOFError:
                 break
             run_rec(line)
-            print(stack)
+            print("s:",stack)
     else:
         prog = open(sys.argv[-1]).read()
         try:
