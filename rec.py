@@ -23,7 +23,7 @@ def run_rec(prog, debug = False):
                 stack[~x] = v
             elif prog[ptr] == '^':
                 if not stack.pop():
-                    raise AssertionError
+                    return True
 
             elif prog[ptr] == ']':
                 raise IndexError('unbalanced brackets')
@@ -37,9 +37,8 @@ def run_rec(prog, debug = False):
 
                 sliced_prog = prog[ptr+1:right-1]
                 while True:
-                    try:
-                        run_rec(sliced_prog)
-                    except AssertionError:
+                    x = run_rec(sliced_prog)
+                    if x == True:
                         break
 
                 ptr = right
@@ -77,6 +76,8 @@ def run_rec(prog, debug = False):
         print(e)
         print(f's: ({ptr}) {prog[ptr]}', stack)
         exit(1)
+
+    return False
 
 if __name__ == '__main__':
     if len(sys.argv) < 2 or "-r" in sys.argv:
