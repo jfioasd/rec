@@ -3,6 +3,7 @@ import sys
 stack = []
 
 def run_rec(prog, debug = False):
+    "Return value = whether we need to break out of a while loop"
     ptr = 0
     try:
         while ptr < len(prog):
