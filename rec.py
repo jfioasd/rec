@@ -53,7 +53,11 @@ def run_rec(prog, debug = False):
             elif prog[ptr] == 'p':
                 print(end = chr(stack.pop()))
             elif prog[ptr] == 'r':
-                stack.append(sys.stdin.read(1))
+                x = sys.stdin.read(1)
+                if x == '':
+                    stack.append(-1)
+                else:
+                    stack.append(ord(x))
             elif prog[ptr] == 's':
                 last = max(0, ptr-1)
                 while last and prog[last].isspace():
