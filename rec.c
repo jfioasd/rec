@@ -2,11 +2,19 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-int run(char pc[], int *sp, int *stack) {
+void printStack(int *sp, int *stack) {
+    printf(" s: [ ");
+    for(int *x = stack; x < sp; x ++) {
+        printf("%d ", *x);
+    }
+    printf("]\n");
+}
+
+int run(char *pc, int *sp, int *stack) {
     // Return value = whether we need to break
     //                out of an infinite loop
     // (1) = no, (0) = yes
-    int x, v;
+    int x, v, *tmp;
     char *right;
     int level = 0;
     for(; *pc; pc++) {
@@ -28,23 +36,19 @@ int run(char pc[], int *sp, int *stack) {
                 break;
             case ':':
                 x = *(sp-1);
-                if (x < 0)
-                    *(sp-1) = *(stack-1-x);
-                else
-                    *(sp-1) = *(sp-2-x);
+                tmp = (x < 0) ? stack - 1: sp - 2;
+                *(sp-1) = *(tmp - x);
                 break;
             case ';':
                 x = *(sp-1);
                 v = *(sp-2);
-                if (x < 0)
-                    *(stack-1-x) = v;
-                else
-                    *(sp-3-x) = v;
+                tmp = (x < 0) ? stack - 1 : sp - 3;
+                *(tmp - x) = v;
                 sp -= 2;
                 break;
             case '^':
                 sp --;
-                if (!*sp)
+                if (*sp == 0)
                     return 0;
                 break;
             case '[':
@@ -57,7 +61,7 @@ int run(char pc[], int *sp, int *stack) {
                 }
                 *(right-1) = '\0';
 
-                while(run(pc+1, sp, stack));
+                while(run(pc+1, sp, stack) != 0);
 
                 *(right-1) = ']';
                 pc = right;
@@ -65,18 +69,28 @@ int run(char pc[], int *sp, int *stack) {
 
             // Debugging commands
             case 'P':
-                printf("%d", *(sp-1));
+                printf("%d\n", *(sp-1));
                 sp --;
+                break;
+            case 'R':
+                scanf("%d", &v);
+                *(sp++) = v;
+                break;
+            case 'p':
+                putchar(*(sp-1));
+                sp --;
+                break;
+            case 'r':
+                v = getchar();
+                *(sp++) = v;
+                break;
+            case 's':
+                printStack(sp, stack);
                 break;
         }
     }
-    // Print whole stack
-    printf("[ ");
-    for(int *x = stack; x < sp; x ++) {
-        printf("%d ", *x);
-    }
-    printf("]\n");
 
+    printStack(sp, stack);
     return 1;
 }
 
@@ -84,12 +98,29 @@ int main(int argc, char **argv) {
     int *stack = (int*)malloc(20000 * sizeof(int));
     int *sp = stack;
 
-    FILE *fp = fopen(argv[1], "r");
-    char prog[2000] = {};
+    if (argc < 2) {
+        char *s = (char*) malloc(100 * sizeof(char));
+        unsigned long len = 0;
+        for(;;) {
+            printf("r> ");
+            len = getline(&s, &len, stdin);
 
-    fread(&prog, sizeof(char), -1, fp);
-    fclose(fp);
+            if(len == -1) {
+                break;
+            }
 
-    run(prog, sp, stack);
+            run(s, sp, stack);
+            printStack(sp, stack);
+        }
+    } else {
+        FILE *fp = fopen(argv[1], "r");
+        char prog[2000] = {};
+
+        fread(&prog, sizeof(char), -1, fp);
+        fclose(fp);
+
+        run(prog, sp, stack);
+    }
+
     free(stack);
 }
