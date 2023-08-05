@@ -8,22 +8,27 @@
 int *stack, *sp;
 int *stack_ret, *sp_ret;
 
-void printStack(int *sp, int *stack) {
+void printStack(int *sp, int *stack, bool nl) {
     printf(" s: [ ");
     for(int *x = stack; x < sp; x ++) {
         printf("%d ", *x);
     }
-    printf("]\n");
+    printf("] ");
+    if (nl) {
+        printf("\n");
+    }
 }
 
-bool run(char *pc, int *sp, int *stack) {
+bool run(char *prog, int *sp, int *stack) {
     // Return value = whether we need to break
     //                out of an infinite loop
     // (0) = no, (1) = yes
     int x, v, *tmp;
     char *right;
     int level = 0;
-    for(; *pc; pc++) {
+
+    bool debug = false;
+    for(char *pc = prog; *pc; pc++) {
         switch(*pc) {
             case '0': case '1': case '2':
             case '3': case '4': case '5':
@@ -91,8 +96,17 @@ bool run(char *pc, int *sp, int *stack) {
                 *(sp++) = v;
                 break;
             case 's':
-                printStack(sp, stack);
+                printStack(sp, stack, true);
                 break;
+            case 'b':
+                debug = true;
+                break;
+        }
+        if (debug && !isspace(*pc)) {
+            printf("(%d) %c", (int)(pc-prog), *pc);
+            printStack(sp, stack, false);
+            if (getchar() == -1)
+                exit(0);
         }
     }
 
@@ -119,7 +133,7 @@ int main(int argc, char **argv) {
 
             run(s, sp, stack);
             
-            printStack(sp_ret, stack_ret);
+            printStack(sp_ret, stack_ret, true);
             stack = stack_ret;
             sp = sp_ret;
         }
