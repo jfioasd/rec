@@ -130,7 +130,7 @@ int main(int argc, char **argv) {
     sp = stack;
 
     if (argc < 2) {
-        char *s = (char*) malloc(sizeof(char) * 1);
+        char *s = (char*) malloc(sizeof(char) * 100);
         unsigned long len = 0;
         for(;;) {
             printf("r> ");
