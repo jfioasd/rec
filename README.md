@@ -16,7 +16,7 @@ The language is summarized below:
 ## Interpreter Spec
 Both interpreters here have a REPL (which you can access with no CLI arguments) and a debugger (which prints program info as the interpreter executes commands). (Use enter to step through the debugger.)
 
-You can use <code>Ctrl-D</code> to exit both the interpreter and the debugger.
+You can use <code>Ctrl-D</code> to exit the interpreter.
 
 ### Added Commands
 * `P`: Pop & print TOS as integer.
