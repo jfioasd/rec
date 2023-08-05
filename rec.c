@@ -108,7 +108,7 @@ bool run(char *prog, int *sp, int *stack) {
                 exit(0);
             }
             switch (cmd){
-                // Don't need to handle for \n
+                // Don't need to handle for '\n' case
                 case 'c':
                     getchar();
                     debug = false;
