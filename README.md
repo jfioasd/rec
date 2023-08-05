@@ -33,11 +33,6 @@ You can use <code>Ctrl-D</code> to exit the REPL or the debugger.
 * `c`: Continue; Stop displaying debugging information until the next breakpoint.
 * `q`: Quit; Exit the debugger. (You can also use Ctrl-D to exit.)
 
-### Python-only flags
-Admittedly, these flags are kind of useless.
-* `-r`: Enter REPL mode.
-* `-d`: Enter debugger mode for the entire program.
-
 ## Pitfalls
 These tips will save you a lot of bugs when using the language.
 
