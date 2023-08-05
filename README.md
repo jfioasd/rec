@@ -1,4 +1,4 @@
-# Rec
+## Rec
 This repository holds the Python & C interpreters for https://esolangs.org/wiki/Rec.
 
 The language is summarized below:
@@ -13,12 +13,12 @@ The language is summarized below:
 |`[ ... ]`| Infinite loop; executes <code>...</code> forever. |
 |`^`| Pops `x`. If `x == 0`, break out of innermost `[ ... ]` loop. <br>(Or terminates program, if not in `[ ... ]` loop.) |
 
-# Interpreter Spec
+## Interpreter Spec
 Both interpreters hosted here have a REPL (which you can access with no CLI arguments). It also has a debugger, which prints program info at each executed command. (Use enter to step through the debugger.)
 
 You can use <code>Ctrl-D</code> to exit both the interpreter and the debugger.
 
-## Added Commands
+### Added Commands
 * `P`: Pop & print TOS as integer.
 * `R`: Read an integer from input, and push the value.
 * `p`: Pop & print TOS as a char.
@@ -26,5 +26,5 @@ You can use <code>Ctrl-D</code> to exit both the interpreter and the debugger.
 * `s`: Prints the entire stack at the current point of execution.
 * `b`: Breakpoint; starts debug mode at this part of program.
 
-# See also
+## See also
 * [Recur interpreter](https://github.com/laerling/recur/), where you can find some examples of an old version of this language.
