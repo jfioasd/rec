@@ -3,8 +3,7 @@
 #include <stdbool.h>
 #include <ctype.h>
 
-// "stack" basically means the pointer
-//  to the bottom of the stack.
+// *stack = pointer to bottom of stack
 int *stack, *sp;
 int *stack_ret, *sp_ret;
 
@@ -19,9 +18,19 @@ void printStack(int *sp, int *stack, bool nl) {
     }
 }
 
+char* skip_bkt(char *pc, char up, char down, int step) {
+    char *offset = pc + step;
+    int level = 1;
+    while (*offset && level > 0) {
+        level += *offset == up;
+        level -= *offset == down;
+        offset += step;
+    }
+    return offset;
+}
+
 bool run(char *prog, int *sp, int *stack) {
-    // Return value = whether we need to break
-    //                out of an infinite loop
+    // Return value = whether we need to break out of an infinite loop
     // (0) = no, (1) = yes
     int x, v, *tmp;
     char *right;
@@ -29,6 +38,7 @@ bool run(char *prog, int *sp, int *stack) {
 
     bool debug = false;
     for(char *pc = prog; *pc; pc++) {
+        sp = (sp < stack) ? stack : sp;
         switch(*pc) {
             case '0': case '1': case '2':
             case '3': case '4': case '5':
@@ -60,22 +70,10 @@ bool run(char *prog, int *sp, int *stack) {
             case '^':
                 sp --;
                 if (*sp == 0)
-                    return 1;
+                    pc = skip_bkt(pc, '[', ']', 1);
                 break;
-            case '[':
-                right = pc + 1;
-                level = 1;
-                while(*right && level > 0) {
-                    level += *right == '[';
-                    level -= *right == ']';
-                    right ++;
-                }
-                *(right-1) = '\0';
-
-                while(run(pc+1, sp, stack) == 0);
-
-                *(right-1) = ']';
-                pc = right;
+            case ']':
+                pc = skip_bkt(pc, ']', '[', -1);
                 break;
 
             // Debugging commands
@@ -110,6 +108,7 @@ bool run(char *prog, int *sp, int *stack) {
         }
     }
 
+    // For REPL (since local values are lost across function calls)
     stack_ret = stack;
     sp_ret = sp;
     return 0;
@@ -124,6 +123,7 @@ int main(int argc, char **argv) {
         unsigned long len = 0;
         for(;;) {
             printf("r> ");
+
             len = getline(&s, &len, stdin);
 
             if(len == -1) {
