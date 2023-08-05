@@ -106,13 +106,14 @@ bool run(char *prog, int *sp, int *stack) {
             char cmd;
             scanf("%c", &cmd);
             switch (cmd){ 
-                case -1:
+                case 0:
                     exit(0);
                     break;
                 case 'c':
                     debug = false;
                     break;
-                case '\n':
+                case 'q':
+                    exit(0);
                     break;
             }
         }
