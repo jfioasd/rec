@@ -70,7 +70,7 @@ bool run(char *prog, int *sp, int *stack) {
             case '^':
                 sp --;
                 if (*sp == 0)
-                    pc = skip_bkt(pc, '[', ']', 1);
+                    pc = skip_bkt(pc, '[', ']', 1) - 1;
                 break;
             case ']':
                 pc = skip_bkt(pc, ']', '[', -1);
@@ -98,6 +98,9 @@ bool run(char *prog, int *sp, int *stack) {
                 break;
             case 'b':
                 debug = true;
+                break;
+            case 'x':
+                debug = false;
                 break;
         }
         if (debug && !isspace(*pc)) {
