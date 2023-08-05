@@ -13,6 +13,13 @@ The language is summarized below:
 |`[ ... ]`| Infinite loop; executes <code>...</code> forever. |
 |`^`| Pops `x`. If `x == 0`, break out of innermost `[ ... ]` loop. <br>(Or terminates program, if not in `[ ... ]` loop.) |
 
+## Pitfalls
+These tips will save you a lot of bugs when using the language.
+
+* `-1` is `0\`, not `1\` (which is `0`)!
+* With `;`, it's important to note that 2 values are popped!
+  * E.g. `[1 2 3 0 1]`: when `;` is called, the new TOS is `3`, not `0`. So this will turn the stack to `[1 0 3]`.
+
 ## Interpreter Spec
 Both interpreters here have a REPL (which you can access with no CLI arguments) and a debugger (which you may enter by adding breakpoints `b` in the program). (Use enter to step through the debugger, in both interpreters.)
 
