@@ -11,7 +11,7 @@ The language is summarized below:
 |`:`| Load; Pops `x`, pushes `stack[~x]`. |
 |`;`| Store; Pops `v` and `x`. Assigns `stack[~x]` to `v`.|
 |`[ ... ]`| Infinite loop; executes <code>...</code> forever. |
-|`^`| Pops `x`. If `x == 0`, break out of innermost `[ ... ]` loop. <br>(Or terminates program, if not in a `[ ... ]` loop.) |
+|`^`| Pops `x`. If `x == 0`, exit the innermost `[ ... ]` loop. <br>(Or terminates program, if not in a `[ ... ]` loop.) |
 
 ## Pitfalls
 These tips will save you a lot of bugs when using the language.
