@@ -103,8 +103,18 @@ bool run(char *prog, int *sp, int *stack) {
         if (debug && !isspace(*pc)) {
             printf("(%d) %c", (int)(pc-prog), *pc);
             printStack(sp, stack, false);
-            if (getchar() == -1)
-                exit(0);
+            char cmd;
+            scanf("%c", &cmd);
+            switch (cmd){ 
+                case -1:
+                    exit(0);
+                    break;
+                case 'c':
+                    debug = false;
+                    break;
+                case '\n':
+                    break;
+            }
         }
     }
 
