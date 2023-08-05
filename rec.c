@@ -37,7 +37,6 @@ bool run(char *prog, int *sp, int *stack) {
     int x, v, *tmp;
     char *right;
     int level = 0;
-
     bool debug = false;
 
     for(char *pc = prog; *pc; pc++) {
