@@ -29,6 +29,7 @@ You can use <code>Ctrl-D</code> to exit both the interpreter and the debugger.
 ### Commands in the debug mode (C interpreter)
 * `\n`: Step to next iteration.
 * `c`: Continue; Stop displaying debugging information until the next breakpoint.
+* `q`: Quit; Exit the debugger.
 
 ### Python-only flags
 Admittedly, these flags are kind of useless.
