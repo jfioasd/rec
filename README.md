@@ -24,9 +24,9 @@ You can use <code>Ctrl-D</code> to exit the REPL.
 * `p`: Pop & print TOS as a char.
 * `r`: Read a char from input, and push the ord value.
 * `s`: Prints the entire stack at the current point of execution.
-* `b`: Breakpoint; starts debug mode at this part of program.
+* `b`: Breakpoint; starts debugger at this part of program.
 
-### Commands in the debug mode (C interpreter)
+### Commands in the debugger (C interpreter)
 * `\n`: Step to next iteration.
 * `c`: Continue; Stop displaying debugging information until the next breakpoint.
 * `q`: Quit; Exit the debugger.
@@ -34,7 +34,7 @@ You can use <code>Ctrl-D</code> to exit the REPL.
 ### Python-only flags
 Admittedly, these flags are kind of useless.
 * `-r`: Enter REPL mode.
-* `-d`: Enter debugger mode for the current program.
+* `-d`: Enter debugger mode for the entire program.
 
 ## See also
 * [Recur interpreter](https://github.com/laerling/recur/) (written by laerling), where you can find some examples of an old version of this language.
