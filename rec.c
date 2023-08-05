@@ -40,7 +40,7 @@ int run(char pc[], int *sp, int *stack) {
                     *(stack-1-x) = v;
                 else
                     *(sp-3-x) = v;
-		        sp -= 2;
+                sp -= 2;
                 break;
             case '^':
                 sp --;
@@ -58,7 +58,7 @@ int run(char pc[], int *sp, int *stack) {
                 *(right-1) = '\0';
 
                 while(run(pc+1, sp, stack));
-                
+
                 *(right-1) = ']';
                 pc = right;
                 break;
