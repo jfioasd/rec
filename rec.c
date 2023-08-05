@@ -99,9 +99,6 @@ bool run(char *prog, int *sp, int *stack) {
             case 'b':
                 debug = true;
                 break;
-            case 'x':
-                debug = false;
-                break;
         }
         if (debug && !isspace(*pc)) {
             printf("(%d) %c", (int)(pc-prog), *pc);
