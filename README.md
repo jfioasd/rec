@@ -32,4 +32,4 @@ Admittedly, these flags are kind of useless.
 * `-d`: Enter debugger mode for the current program.
 
 ## See also
-* [Recur interpreter](https://github.com/laerling/recur/), where you can find some examples of an old version of this language.
+* [Recur interpreter](https://github.com/laerling/recur/) (written by someone else), where you can find some examples of an old version of this language.
