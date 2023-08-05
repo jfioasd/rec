@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include <ctype.h>
 
+int *stack, *sp;
+
+int *stack_ret, *sp_ret;
+
 void printStack(int *sp, int *stack) {
     printf(" s: [ ");
     for(int *x = stack; x < sp; x ++) {
@@ -90,13 +94,14 @@ int run(char *pc, int *sp, int *stack) {
         }
     }
 
-    printStack(sp, stack);
+    stack_ret = stack;
+    sp_ret = sp;
     return 1;
 }
 
 int main(int argc, char **argv) {
-    int *stack = (int*)malloc(20000 * sizeof(int));
-    int *sp = stack;
+    stack = (int*)malloc(20000 * sizeof(int));
+    sp = stack;
 
     if (argc < 2) {
         char *s = (char*) malloc(100 * sizeof(char));
@@ -110,7 +115,9 @@ int main(int argc, char **argv) {
             }
 
             run(s, sp, stack);
-            printStack(sp, stack);
+            printStack(sp_ret, stack_ret);
+            stack = stack_ret;
+            sp = sp_ret;
         }
     } else {
         FILE *fp = fopen(argv[1], "r");
