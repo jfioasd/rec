@@ -25,7 +25,7 @@ Both interpreters here have a REPL (which you can access with no CLI arguments) 
 
 Use Enter to step through the debugger.
 
-You can use <code>Ctrl-D</code> to exit the REPL.
+You can use <code>Ctrl-D</code> to exit the REPL or the debugger.
 
 ### Added Commands
 * `P`: Pop & print TOS as integer.
@@ -38,7 +38,7 @@ You can use <code>Ctrl-D</code> to exit the REPL.
 ### Commands in the debugger (C interpreter)
 * `\n`: Step to next iteration.
 * `c`: Continue; Stop displaying debugging information until the next breakpoint.
-* `q`: Quit; Exit the debugger. (You can't use Ctrl-D because it's broken; I don't know how to fix it.)
+* `q`: Quit; Exit the debugger. (You can also use Ctrl-D to exit.)
 
 ### Python-only flags
 Admittedly, these flags are kind of useless.
