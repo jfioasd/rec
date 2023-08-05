@@ -1,5 +1,5 @@
 ## Rec
-This repository holds the Python & C interpreters for https://esolangs.org/wiki/Rec. (Though I don't want to maintain the Python interpreter anymore.)
+This repository holds the Python & C interpreters for [Rec](https://esolangs.org/wiki/Rec). (Though I don't want to maintain the Python interpreter anymore.)
 
 The language is summarized below:
 
