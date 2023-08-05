@@ -26,6 +26,10 @@ You can use <code>Ctrl-D</code> to exit both the interpreter and the debugger.
 * `s`: Prints the entire stack at the current point of execution.
 * `b`: Breakpoint; starts debug mode at this part of program.
 
+### Commands in the debug mode (C interpreter)
+* `\n`: Step to next iteration.
+* `c`: Continue; Stop displaying debugging information until the next breakpoint.
+
 ### Python-only flags
 Admittedly, these flags are kind of useless.
 * `-r`: Enter REPL mode.
