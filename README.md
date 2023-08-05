@@ -26,5 +26,10 @@ You can use <code>Ctrl-D</code> to exit both the interpreter and the debugger.
 * `s`: Prints the entire stack at the current point of execution.
 * `b`: Breakpoint; starts debug mode at this part of program.
 
+### Python-only flags
+Admittedly, these flags are kind of useless.
+* `-r`: Enter REPL mode.
+* `-d`: Enter debugger mode for the current program.
+
 ## See also
 * [Recur interpreter](https://github.com/laerling/recur/), where you can find some examples of an old version of this language.
