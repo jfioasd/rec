@@ -3,7 +3,6 @@
 #include <ctype.h>
 
 int *stack, *sp;
-
 int *stack_ret, *sp_ret;
 
 void printStack(int *sp, int *stack) {
@@ -115,6 +114,7 @@ int main(int argc, char **argv) {
             }
 
             run(s, sp, stack);
+            
             printStack(sp_ret, stack_ret);
             stack = stack_ret;
             sp = sp_ret;
