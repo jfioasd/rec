@@ -115,11 +115,11 @@ bool run(char *prog, int *sp, int *stack) {
 }
 
 int main(int argc, char **argv) {
-    stack = (int*)malloc(20000 * sizeof(int));
+    stack = (int*)malloc(sizeof(int) * 20000);
     sp = stack;
 
     if (argc < 2) {
-        char *s = (char*) malloc(100 * sizeof(char));
+        char *s = (char*) malloc(sizeof(char) * 1);
         unsigned long len = 0;
         for(;;) {
             printf("r> ");
