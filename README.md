@@ -25,7 +25,7 @@ You can use <code>Ctrl-D</code> to exit both the interpreter and the debugger.
 * `r`: Read a char from input, and push the ord value.
 * `s`: Prints the entire stack at the current point of execution.
 * `b`: Breakpoint; starts debug mode at this part of program.
-* `x`: Withhold debugger information starting at this part of the program.
+* `x`: Withhold debugger information starting at this part of the program. (C interpreter only)
 
 ### Python-only flags
 Admittedly, these flags are kind of useless.
