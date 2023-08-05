@@ -113,6 +113,7 @@ int main(int argc, char **argv) {
             len = getline(&s, &len, stdin);
 
             if(len == -1) {
+                free(s);
                 break;
             }
 
