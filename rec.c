@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include <ctype.h>
 
+// "stack" basically means the pointer
+//  to the bottom of the stack.
 int *stack, *sp;
 int *stack_ret, *sp_ret;
 
@@ -13,10 +16,10 @@ void printStack(int *sp, int *stack) {
     printf("]\n");
 }
 
-int run(char *pc, int *sp, int *stack) {
+bool run(char *pc, int *sp, int *stack) {
     // Return value = whether we need to break
     //                out of an infinite loop
-    // (1) = no, (0) = yes
+    // (0) = no, (1) = yes
     int x, v, *tmp;
     char *right;
     int level = 0;
@@ -52,7 +55,7 @@ int run(char *pc, int *sp, int *stack) {
             case '^':
                 sp --;
                 if (*sp == 0)
-                    return 0;
+                    return 1;
                 break;
             case '[':
                 right = pc + 1;
@@ -64,7 +67,7 @@ int run(char *pc, int *sp, int *stack) {
                 }
                 *(right-1) = '\0';
 
-                while(run(pc+1, sp, stack) != 0);
+                while(run(pc+1, sp, stack) == 0);
 
                 *(right-1) = ']';
                 pc = right;
@@ -95,7 +98,7 @@ int run(char *pc, int *sp, int *stack) {
 
     stack_ret = stack;
     sp_ret = sp;
-    return 1;
+    return 0;
 }
 
 int main(int argc, char **argv) {
