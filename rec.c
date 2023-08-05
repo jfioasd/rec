@@ -21,11 +21,13 @@ void printStack(int *sp, int *stack, bool nl) {
 char* skip_bkt(char *pc, char up, char down, int step) {
     char *offset = pc + step;
     int level = 1;
+
     while (*offset && level > 0) {
         level += *offset == up;
         level -= *offset == down;
         offset += step;
     }
+
     return offset;
 }
 
@@ -37,8 +39,10 @@ bool run(char *prog, int *sp, int *stack) {
     int level = 0;
 
     bool debug = false;
+
     for(char *pc = prog; *pc; pc++) {
         sp = (sp < stack) ? stack : sp;
+
         switch(*pc) {
             case '0': case '1': case '2':
             case '3': case '4': case '5':
@@ -49,17 +53,21 @@ bool run(char *prog, int *sp, int *stack) {
                 else
                     *(sp++) = *pc - 48;
                 break;
+
             case '/':
                 *(sp-1) += 1;
                 break;
+
             case '\\':
                 *(sp-1) -= 1;
                 break;
+
             case ':':
                 x = *(sp-1);
                 tmp = (x < 0) ? stack - 1: sp - 2;
                 *(sp-1) = *(tmp - x);
                 break;
+
             case ';':
                 x = *(sp-1);
                 v = *(sp-2);
@@ -67,11 +75,13 @@ bool run(char *prog, int *sp, int *stack) {
                 *(tmp - x) = v;
                 sp -= 2;
                 break;
+
             case '^':
                 sp --;
                 if (*sp == 0)
                     pc = skip_bkt(pc, '[', ']', 1) - 1;
                 break;
+
             case ']':
                 pc = skip_bkt(pc, ']', '[', -1);
                 break;
@@ -81,32 +91,40 @@ bool run(char *prog, int *sp, int *stack) {
                 printf("%d\n", *(sp-1));
                 sp --;
                 break;
+
             case 'R':
                 scanf("%d", &v);
                 *(sp++) = v;
                 break;
+
             case 'p':
                 putchar(*(sp-1));
                 sp --;
                 break;
+
             case 'r':
                 v = getchar();
                 *(sp++) = v;
                 break;
+
             case 's':
                 printStack(sp, stack, true);
                 break;
+
             case 'b':
                 debug = true;
                 break;
         }
+
         if (debug && !isspace(*pc)) {
             printf("(%d) %c", (int)(pc-prog), *pc);
             printStack(sp, stack, false);
+
             char cmd;
             if (scanf("%c", &cmd) == EOF) {
                 exit(0);
             }
+
             switch (cmd){
                 // Don't need to handle for '\n' case
                 case 'c':
@@ -119,10 +137,10 @@ bool run(char *prog, int *sp, int *stack) {
             }
         }
     }
-
     // For REPL (since local values are lost across function calls)
     stack_ret = stack;
     sp_ret = sp;
+
     return 0;
 }
 
@@ -148,10 +166,11 @@ int main(int argc, char **argv) {
             }
 
             run(s, sp, stack);
-            
-            printStack(sp_ret, stack_ret, true);
+
             stack = stack_ret;
             sp = sp_ret;
+
+            printStack(sp, stack, true);
         }
     } else {
         FILE *fp = fopen(argv[1], "r");
