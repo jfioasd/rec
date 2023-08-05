@@ -14,7 +14,7 @@ The language is summarized below:
 |`^`| Pops `x`. If `x == 0`, break out of innermost `[ ... ]` loop. <br>(Or terminates program, if not in `[ ... ]` loop.) |
 
 ## Interpreter Spec
-Both interpreters here have a REPL (which you can access with no CLI arguments) and a debugger (which prints program info as the interpreter executes commands). (Use enter to step through the debugger, in both interpreters.)
+Both interpreters here have a REPL (which you can access with no CLI arguments) and a debugger (which you may enter by adding breakpoints `b` in the program). (Use enter to step through the debugger, in both interpreters.)
 
 You can use <code>Ctrl-D</code> to exit the REPL.
 
