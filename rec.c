@@ -110,6 +110,7 @@ bool run(char *prog, int *sp, int *stack) {
             switch (cmd){
                 // Don't need to handle for \n
                 case 'c':
+                    getchar();
                     debug = false;
                     break;
                 case 'q':
