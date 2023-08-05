@@ -132,14 +132,18 @@ int main(int argc, char **argv) {
     if (argc < 2) {
         char *s = (char*) malloc(sizeof(char) * 100);
         unsigned long len = 0;
+        
         for(;;) {
             printf("r> ");
-
             len = getline(&s, &len, stdin);
 
             if(len == -1) {
                 free(s);
                 break;
+            }
+
+            if(len == 1 && s[len-1] == '\n') {
+                continue;
             }
 
             run(s, sp, stack);
