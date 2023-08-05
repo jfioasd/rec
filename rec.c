@@ -104,11 +104,11 @@ bool run(char *prog, int *sp, int *stack) {
             printf("(%d) %c", (int)(pc-prog), *pc);
             printStack(sp, stack, false);
             char cmd;
-            scanf("%c", &cmd);
-            switch (cmd){ 
-                case 0:
-                    exit(0);
-                    break;
+            if (scanf("%c", &cmd) == EOF) {
+                exit(0);
+            }
+            switch (cmd){
+                // Don't need to handle for \n
                 case 'c':
                     debug = false;
                     break;
