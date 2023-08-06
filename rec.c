@@ -8,7 +8,7 @@ int *stack, *sp;
 int *stack_ret, *sp_ret;
 
 void printStack(int *sp, int *stack, bool nl) {
-    printf(" s: [ ");
+    printf(" [ ");
     for(int *x = stack; x < sp; x ++) {
         printf("%d ", *x);
     }
@@ -35,8 +35,6 @@ bool run(char *prog, int *sp, int *stack) {
     // Return value = whether we need to break out of an infinite loop
     // (0) = no, (1) = yes
     int x, v, *tmp;
-    char *right;
-    int level = 0;
     bool debug = false;
 
     for(char *pc = prog; *pc; pc++) {
@@ -154,7 +152,7 @@ int main(int argc, char **argv) {
         for(;;) {
             printf("r> ");
             len = getline(&s, &len, stdin);
-
+            
             if(len == -1) {
                 free(s);
                 break;
