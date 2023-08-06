@@ -1,4 +1,4 @@
-[0^ Ackermann function ]
+                              [0^ Ackermann function ]
 0 0 0\                        [0^ Initialize stack as [0 0 -1].
                                   -1 is used to check if the stack has only one item left ]
 R R                           [0^ Push arguments onto stack ]
