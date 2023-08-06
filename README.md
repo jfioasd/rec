@@ -37,6 +37,7 @@ You can use <code>Ctrl-D</code> to exit the REPL or the debugger.
 * `-1` is represented by `0\`, not `1\` (which is `0`)!
 * `;` pops 2 values from the stack!
   * E.g. `[1 2 3 0 1]`: when `;` is called, the new TOS is `3`, not `0`. So this will turn the stack to `[1 0 3]`.
+* `:` and `;` look similar (and are easily confusable), so be careful.
 
 ## See also
 * [Recur interpreter](https://github.com/laerling/recur/) (written by laerling), where you can find some examples of an old version of this language.
