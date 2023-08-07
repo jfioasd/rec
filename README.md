@@ -48,7 +48,7 @@ You can use <code>Ctrl-D</code> to exit the REPL or the debugger.
 
 ### Commands in the debugger (C interpreter)
 * `\n`: Step to next iteration.
-* `c`: Continue; Stop displaying debugging information until the next breakpoint.
+* `m`: If current char is `[`, hide debugging information until the matching `]`.
 * `q`: Quit; Exit the debugger. (You can also use Ctrl-D to exit.)
 
 ## Pitfalls
