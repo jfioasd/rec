@@ -127,6 +127,10 @@ bool run(char *prog, register int sp, int *stack) {
 
             switch (cmd){
                 // Don't need to handle for '\n' case
+                case 'c':
+                    getchar();
+                    debug = false;
+                    break;
                 case 'm':
                     getchar();
                     debug = false;
