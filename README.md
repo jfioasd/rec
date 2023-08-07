@@ -5,7 +5,7 @@ This repository holds the Python & C interpreters for [Rec](https://esolangs.org
 
 Since Rec+ is basically backwards compatible with Rec, if you want to use `rec.c` with only Rec commands, you can remove the respective case statements in `rec.c` before compiling. (It doesn't make sense to hold two files in a repository that are almost the same.)
 
-`rec.py` is my (abandoned) interpreter in Python. It only supports Rec commands.
+`rec.py` is my (abandoned) Rec interpreter in Python.
 
 ## Command Summary
 The language is summarized below:
