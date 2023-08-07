@@ -13,7 +13,7 @@ The language is summarized below:
 |`[ ... ]`| Infinite loop; executes <code>...</code> forever. |
 |`^`| Pops `x`. If `x == 0`, break out of the innermost `[ ... ]` loop. <br>(Or terminates program, if not in a `[ ... ]` loop.) |
 
-## Rec+ (`recp.c`)
+## Rec+
 I made this language because increment / decrement operations in Rec are too slow for integers. Here are the added instructions:
 |Command|Behavior|
 |:---:  |:---:|
