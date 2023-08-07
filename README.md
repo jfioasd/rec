@@ -22,7 +22,7 @@ I made this language because increment / decrement operations are too slow for i
 |`*`    | Multiply; Pops `x` and `y`, pushes `x*y`.|
 |`{`    | Negative?; Pops `x`, pushes `x<0`.|
 |`&`    | Bitwise AND; Pops `x` and `y`, pushes `x&y`.|
-|`\|`    | Bitwise OR; Pops `x` and `y`, pushes `x|y`.|
+|`\|`    | Bitwise OR; Pops `x` and `y`, pushes `x\|y`.|
 |`~`    | Bitwise XOR; Pops `x` and `y`, pushes `x^y`.|
 |`(`    | Left shift; Pops `x` and `y`, pushes `x<<y`.|
 |`)`    | Right shift; Pops `x` and `y`, pushes `x>>y`.|
