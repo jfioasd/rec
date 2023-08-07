@@ -16,13 +16,13 @@ void printStack(int sp, int *stack, bool nl) {
     }
 }
 
-char* skip_bkt(char *pc, char up, char down, int step) {
-    char *offset = pc + step;
+int skip_bkt(int pc, char *prog, char up, char down, int step) {
+    int offset = pc + step;
     int level = 1;
 
-    while (*offset && level > 0) {
-        level += *offset == up;
-        level -= *offset == down;
+    while (prog[offset] && level > 0) {
+        level += prog[offset] == up;
+        level -= prog[offset] == down;
         offset += step;
     }
 
@@ -35,18 +35,18 @@ bool run(char *prog, int sp, int *stack) {
     int x, v, tmp;
     bool debug = false;
 
-    for(char *pc = prog; *pc; pc++) {
+    for(int pc = 0; prog[pc]; pc++) {
         sp = (sp < 0) ? 0 : sp;
 
-        switch(*pc) {
+        switch(prog[pc]) {
             case '0': case '1': case '2':
             case '3': case '4': case '5':
             case '6': case '7': case '8':
             case '9':
-                if(isdigit(*(pc-1)))
-                    stack[sp-1] = stack[sp-1] * 10 + *pc - 48;
+                if(isdigit(prog[pc-1]))
+                    stack[sp-1] = stack[sp-1] * 10 + prog[pc] - 48;
                 else
-                    stack[sp++] = *pc - 48;
+                    stack[sp++] = prog[pc] - 48;
                 break;
 
             case '/':
@@ -74,11 +74,11 @@ bool run(char *prog, int sp, int *stack) {
             case '^':
                 sp --;
                 if (stack[sp] == 0)
-                    pc = skip_bkt(pc, '[', ']', 1) - 1;
+                    pc = skip_bkt(pc, prog, '[', ']', 1) - 1;
                 break;
 
             case ']':
-                pc = skip_bkt(pc, ']', '[', -1);
+                pc = skip_bkt(pc, prog, ']', '[', -1);
                 break;
 
             // Debugging commands
@@ -111,8 +111,8 @@ bool run(char *prog, int sp, int *stack) {
                 break;
         }
 
-        if (debug && !isspace(*pc)) {
-            printf("(%d) %c", (int)(pc-prog), *pc);
+        if (debug && !isspace(prog[pc])) {
+            printf("(%d) %c", pc, prog[pc]);
             printStack(sp, stack, false);
 
             char cmd;
