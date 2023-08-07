@@ -1,10 +1,13 @@
 ## Rec
 This repository holds the Python & C interpreters for [Rec](https://esolangs.org/wiki/Rec). (Though I don't want to maintain the Python interpreter anymore.)
 
-`rec.c` is a C interpreter of Rec+ with a REPL and debugger. Since Rec+ is basically backwards compatible with Rec, if you want to use the interpreter with only Rec commands, you can remove the respective case statements in `rec.c` before compiling. (It doesn't make sense to hold two files that are almost the same.)
+`rec.c` is a C interpreter of Rec+ with a REPL and debugger. (You can compile it with C99.)
+
+Since Rec+ is basically backwards compatible with Rec, if you want to use `rec.c` with only Rec commands, you can remove the respective case statements in `rec.c` before compiling. (It doesn't make sense to hold two files in a repository that are almost the same.)
 
 `rec.py` is my (abandoned) interpreter in Python. It only supports Rec commands.
 
+## Command Summary
 The language is summarized below:
 
 |Command|Behavior|
