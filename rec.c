@@ -4,13 +4,13 @@
 #include <ctype.h>
 
 // *stack = pointer to bottom of stack
-int *stack, *sp;
-int *stack_ret, *sp_ret;
+int *stack, sp;
+int *stack_ret, sp_ret;
 
-void printStack(int *sp, int *stack, bool nl) {
+void printStack(int sp, int *stack, bool nl) {
     printf(" [ ");
-    for(int *x = stack; x < sp; x ++) {
-        printf("%d ", *x);
+    for(int x=0; x < sp; x ++) {
+        printf("%d ", stack[x]);
     }
     printf("] ");
     if (nl) {
@@ -31,14 +31,14 @@ char* skip_bkt(char *pc, char up, char down, int step) {
     return offset;
 }
 
-bool run(char *prog, int *sp, int *stack) {
+bool run(char *prog, int sp, int *stack) {
     // Return value = whether we need to break out of an infinite loop
     // (0) = no, (1) = yes
-    int x, v, *tmp;
+    int x, v, tmp;
     bool debug = false;
 
     for(char *pc = prog; *pc; pc++) {
-        sp = (sp < stack) ? stack : sp;
+        sp = (sp < 0) ? 0 : sp;
 
         switch(*pc) {
             case '0': case '1': case '2':
@@ -46,36 +46,36 @@ bool run(char *prog, int *sp, int *stack) {
             case '6': case '7': case '8':
             case '9':
                 if(isdigit(*(pc-1)))
-                    *(sp-1) = *(sp-1) * 10 + *pc - 48;
+                    stack[sp-1] = stack[sp-1] * 10 + *pc - 48;
                 else
-                    *(sp++) = *pc - 48;
+                    stack[sp++] = *pc - 48;
                 break;
 
             case '/':
-                *(sp-1) += 1;
+                stack[sp-1] += 1;
                 break;
 
             case '\\':
-                *(sp-1) -= 1;
+                stack[sp-1] -= 1;
                 break;
 
             case ':':
-                x = *(sp-1);
-                tmp = (x < 0) ? stack - 1: sp - 2;
-                *(sp-1) = *(tmp - x);
+                x = stack[sp-1];
+                tmp = (x < 0) ? -1: sp - 2;
+                stack[sp-1] = stack[tmp - x];
                 break;
 
             case ';':
-                x = *(sp-1);
-                v = *(sp-2);
-                tmp = (x < 0) ? stack - 1 : sp - 3;
-                *(tmp - x) = v;
+                x = stack[sp-1];
+                v = stack[sp-2];
+                tmp = (x < 0) ? -1 : sp - 3;
+                stack[tmp - x] = v;
                 sp -= 2;
                 break;
 
             case '^':
                 sp --;
-                if (*sp == 0)
+                if (stack[sp] == 0)
                     pc = skip_bkt(pc, '[', ']', 1) - 1;
                 break;
 
@@ -85,23 +85,23 @@ bool run(char *prog, int *sp, int *stack) {
 
             // Debugging commands
             case 'P':
-                printf("%d\n", *(sp-1));
+                printf("%d\n", stack[sp-1]);
                 sp --;
                 break;
 
             case 'R':
                 scanf("%d", &v);
-                *(sp++) = v;
+                stack[sp++] = v;
                 break;
 
             case 'p':
-                putchar(*(sp-1));
+                putchar(stack[sp-1]);
                 sp --;
                 break;
 
             case 'r':
                 v = getchar();
-                *(sp++) = v;
+                stack[sp++] = v;
                 break;
 
             case 's':
@@ -143,7 +143,7 @@ bool run(char *prog, int *sp, int *stack) {
 
 int main(int argc, char **argv) {
     stack = (int*)malloc(sizeof(int) * 20000);
-    sp = stack;
+    sp = 0;
 
     if (argc < 2) {
         char *s = (char*) malloc(sizeof(char) * 100);
@@ -156,10 +156,6 @@ int main(int argc, char **argv) {
             if(len == -1) {
                 free(s);
                 break;
-            }
-
-            if(len == 1 && s[len-1] == '\n') {
-                continue;
             }
 
             run(s, sp, stack);
