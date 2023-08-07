@@ -35,7 +35,14 @@ bool run(char *prog, register int sp, int *stack) {
     int x, v, tmp;
     bool debug = false;
 
+    // Next matching `]`, for 'm' command in debugger.
+    int next_dbg = -1;
+
     for(int pc = 0; prog[pc]; pc++) {
+        if(pc == next_dbg) {
+            debug = true;
+            next_dbg = -1;
+        }
         sp = (sp < 0) ? 0 : sp;
 
         switch(prog[pc]) {
@@ -120,9 +127,11 @@ bool run(char *prog, register int sp, int *stack) {
 
             switch (cmd){
                 // Don't need to handle for '\n' case
-                case 'c':
+                case 'm':
                     getchar();
                     debug = false;
+                    if(prog[pc] == '[')
+                        next_dbg = skip_bkt(pc, prog, '[', ']', 1) + 1;
                     break;
                 case 'q':
                     exit(0);
