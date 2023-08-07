@@ -3,9 +3,7 @@
 #include <stdbool.h>
 #include <ctype.h>
 
-// *stack = pointer to bottom of stack
-int *stack, sp;
-int *stack_ret, sp_ret;
+int sp_ret;
 
 void printStack(int sp, int *stack, bool nl) {
     printf(" [ ");
@@ -134,16 +132,17 @@ bool run(char *prog, int sp, int *stack) {
             }
         }
     }
+    
     // For REPL (since local values are lost across function calls)
-    stack_ret = stack;
     sp_ret = sp;
 
     return 0;
 }
 
 int main(int argc, char **argv) {
-    stack = (int*)malloc(sizeof(int) * 20000);
-    sp = 0;
+    // *stack = pointer to bottom of stack
+    int *stack = (int*)malloc(sizeof(int) * 20000);
+    int sp = 0;
 
     if (argc < 2) {
         char *s = (char*) malloc(sizeof(char) * 100);
@@ -159,8 +158,6 @@ int main(int argc, char **argv) {
             }
 
             run(s, sp, stack);
-
-            stack = stack_ret;
             sp = sp_ret;
 
             printStack(sp, stack, true);
