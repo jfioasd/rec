@@ -29,7 +29,7 @@ int skip_bkt(int pc, char *prog, char up, char down, int step) {
     return offset;
 }
 
-bool run(char *prog, int sp, int *stack) {
+bool run(char *prog, register int sp, int *stack) {
     // Return value = whether we need to break out of an infinite loop
     // (0) = no, (1) = yes
     int x, v, tmp;
@@ -83,30 +83,28 @@ bool run(char *prog, int sp, int *stack) {
 
             // Debugging commands
             case 'P':
-                printf("%d\n", stack[sp-1]);
-                sp --;
+                printf("%d\n", stack[--sp]);
                 break;
 
             case 'R':
-                scanf("%d", &v);
-                stack[sp++] = v;
+                scanf("%d", &tmp);
+                stack[sp++] = tmp;
                 break;
 
             case 'p':
-                putchar(stack[sp-1]);
-                sp --;
+                putchar(stack[--sp]);
                 break;
 
             case 'r':
-                v = getchar();
-                stack[sp++] = v;
+                tmp = getchar();
+                stack[sp++] = tmp;
                 break;
 
             case 's':
                 printStack(sp, stack, true);
                 break;
 
-            case 'b':
+            case '!':
                 debug = true;
                 break;
         }
