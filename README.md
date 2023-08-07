@@ -14,7 +14,7 @@ The language is summarized below:
 |`^`| Pops `x`. If `x == 0`, break out of the innermost `[ ... ]` loop. <br>(Or terminates program, if not in a `[ ... ]` loop.) |
 
 ## Rec+ (`recp.c`)
-I made this language because increment / decrement operations are too slow for integers. Here are the added instructions:
+I made this language because increment / decrement operations in Rec are too slow for integers. Here are the added instructions:
 |Command|Behavior|
 |:---:  |:---:|
 |`+`    | Add; Pops `x` and `y`, pushes `x+y`.|
