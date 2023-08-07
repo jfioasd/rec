@@ -13,6 +13,24 @@ The language is summarized below:
 |`[ ... ]`| Infinite loop; executes <code>...</code> forever. |
 |`^`| Pops `x`. If `x == 0`, break out of the innermost `[ ... ]` loop. <br>(Or terminates program, if not in a `[ ... ]` loop.) |
 
+## Rec+ (`recp.c`)
+I made this language because increment / decrement operations are too slow for integers. Here are the added instructions:
+|Command|Behavior|
+|:---:  |:---:|
+|`+`    | Add; Pops `x` and `y`, pushes `x+y`.|
+|`_`    | Negate: Pops `x`, pushes `-x`. |
+|`*`    | Multiply; Pops `x` and `y`, pushes `x*y`.|
+|`{`    | Negative?; Pops `x`, pushes `x<0`.|
+|`&`    | Bitwise AND; Pops `x` and `y`, pushes `x&y`.|
+|`|`    | Bitwise OR; Pops `x` and `y`, pushes `x|y`.|
+|`~`    | Bitwise XOR; Pops `x` and `y`, pushes `x^y`.|
+|`(`    | Left shift; Pops `x` and `y`, pushes `x<<y`.|
+|`)`    | Right shift; Pops `x` and `y`, pushes `x>>y`.|
+
+I didn't include division because it's a slow operation anyway.
+
+Bitwise NOT can just be `1_~` (XOR with `-1`).
+
 ## Interpreter Spec
 Both interpreters here have a REPL (which you can access with no CLI arguments) and a debugger (which you may enter by adding breakpoints `b` in the program).
 
