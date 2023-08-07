@@ -60,7 +60,7 @@ You can use <code>Ctrl-D</code> to exit the REPL or the debugger.
 * `q`: Quit; Exit the debugger. (You can also use Ctrl-D to exit.)
 
 ## Pitfalls
-* `-1` is represented by `0\`, not `1\` (which is `0`)!
+* `-1` is represented by `0\`, not `1\` (which is `0`)! (Though, in Rec+, you can just write `1_`)
 * `;` pops 2 values from the stack!
   * E.g. `[1 2 3 0 1]`: when `;` is called, the new TOS is `3`, not `0`. So this will turn the stack to `[1 0 3]`.
 * `:` and `;` look similar (and are easily confusable), so be careful.
