@@ -160,7 +160,7 @@ bool run(char *prog, register int sp, int *stack) {
                 printStack(sp, stack, true);
                 break;
 
-            case '!':
+            case 'b':
                 debug = true;
                 break;
         }
