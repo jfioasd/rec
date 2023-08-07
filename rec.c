@@ -117,7 +117,7 @@ bool run(char *prog, register int sp, int *stack) {
         }
 
         if (debug && !isspace(prog[pc])) {
-            printf("(%d) %c", pc, prog[pc]);
+            printf("(%d) '%c'", pc, prog[pc]);
             printStack(sp, stack, false);
 
             char cmd;
