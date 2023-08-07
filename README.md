@@ -27,7 +27,7 @@ I made this language because increment / decrement operations in Rec are too slo
 |`+`    | Add; Pops `x` and `y`, pushes `x+y`.|
 |`_`    | Negate: Pops `x`, pushes `-x`. |
 |`*`    | Multiply; Pops `x` and `y`, pushes `x*y`.|
-|`{`    | Negative?; Pops `x`, pushes `x<0`.|
+|`{`    | Negative? Pops `x`, pushes `x<0`.|
 |`&`    | Bitwise AND; Pops `x` and `y`, pushes `x&y`.|
 |`\|`    | Bitwise OR; Pops `x` and `y`, pushes `x\|y`.|
 |`~`    | Bitwise XOR; Pops `x` and `y`, pushes `x^y`.|
