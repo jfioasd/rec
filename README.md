@@ -1,9 +1,7 @@
 ## Rec
 This repository holds the Python & C interpreters for [Rec](https://esolangs.org/wiki/Rec). (Though I don't want to maintain the Python interpreter anymore.)
 
-`rec.c` is a C interpreter of Rec+ with a REPL and debugger. (You can compile it with a compiler that supports C99.)
-
-Since Rec+ is basically backwards compatible with Rec, if you want to use `rec.c` with only Rec commands, you can remove the respective case statements in `rec.c` before compiling. (It doesn't make sense to hold two files in a repository that are almost the same.)
+`rec.c` is a C interpreter of Rec with a REPL and debugger. (You can compile it with a compiler that supports C99.)
 
 `rec.py` is my (abandoned) Rec interpreter in Python.
 
@@ -19,24 +17,6 @@ The language is summarized below:
 |`;`| Store; Pops `v` and `x`. Assigns `stack[~x]` to `v`.|
 |`[ ... ]`| Infinite loop; executes <code>...</code> forever. |
 |`^`| Pops `x`. If `x == 0`, break out of the innermost `[ ... ]` loop. <br>(Or terminates program, if not in a `[ ... ]` loop.) |
-
-## Rec+
-I made this language because increment / decrement operations in Rec are too slow for integers. Here are the added instructions:
-|Command|Behavior|
-|:---:  |:---:|
-|`+`    | Add; Pops `x` and `y`, pushes `x+y`.|
-|`_`    | Negate: Pops `x`, pushes `-x`. |
-|`*`    | Multiply; Pops `x` and `y`, pushes `x*y`.|
-|`{`    | Negative? Pops `x`, pushes `x<0`.|
-|`&`    | Bitwise AND; Pops `x` and `y`, pushes `x&y`.|
-|`\|`    | Bitwise OR; Pops `x` and `y`, pushes `x\|y`.|
-|`~`    | Bitwise XOR; Pops `x` and `y`, pushes `x^y`.|
-|`(`    | Left shift; Pops `x` and `y`, pushes `x<<y`.|
-|`)`    | Right shift; Pops `x` and `y`, pushes `x>>y`.|
-
-I didn't include division because it's a slow operation anyway.
-
-Bitwise NOT can just be `1_~` (XOR with `-1`).
 
 ## Interpreter Spec
 Both interpreters here have a REPL (which you can access with no CLI arguments) and a debugger (which you may enter by adding breakpoints `b` in the program).
