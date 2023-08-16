@@ -47,3 +47,4 @@ You can use <code>Ctrl-D</code> to exit the REPL or the debugger.
 
 ## See also
 * [Recur interpreter](https://github.com/laerling/recur/) (written by laerling), where you can find some examples of an old version of this language.
+* [Rec+](https://github.com/jfioasd/rec_p)
