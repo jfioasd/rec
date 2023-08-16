@@ -55,65 +55,12 @@ bool run(char *prog, register int sp, int *stack) {
                     stack[sp++] = prog[pc] - 48;
                 break;
 
-            case '+':
-                x = stack[sp-1];
-                v = stack[sp-2];
-                stack[sp - 2] = x + v;
-                sp --;
-                break;
-
-            case '_':
-                stack[sp-1] = -stack[sp-1];
-                break;
-
-            case '*':
-                x = stack[sp-1];
-                v = stack[sp-2];
-                stack[sp-2] = x * v;
-                sp --;
-                break;
-
             case '/':
                 stack[sp-1] += 1;
                 break;
 
             case '\\':
                 stack[sp-1] -= 1;
-                break;
-
-            case '&':
-                v = stack[sp-1];
-                x = stack[sp-2];
-                stack[sp-2] = x & v;
-                sp --;
-                break;
-
-            case '|':
-                v = stack[sp-1];
-                x = stack[sp-2];
-                stack[sp-2] = x | v;
-                sp --;
-                break;
-
-            case '~':
-                v = stack[sp-1];
-                x = stack[sp-2];
-                stack[sp-2] = x ^ v;
-                sp --;
-                break;
-
-            case '(':
-                v = stack[sp-1];
-                x = stack[sp-2];
-                stack[sp-2] = x << v;
-                sp --;
-                break;
-
-            case ')':
-                v = stack[sp-1];
-                x = stack[sp-2];
-                stack[sp-2] = x >> v;
-                sp --;
                 break;
 
             case ':':
@@ -128,10 +75,6 @@ bool run(char *prog, register int sp, int *stack) {
                 tmp = (x < 0) ? -1 : sp - 3;
                 stack[tmp - x] = v;
                 sp -= 2;
-                break;
-
-            case '{':
-                stack[sp-1] = stack[sp-1] < 0;
                 break;
 
             case '^':
